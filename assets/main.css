@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html, body {
 	height: 100%;
 	margin: 0;
@@ -11,27 +15,43 @@ h1 {
 	font-weight: normal;
 	font-size: 140%;
 }
+.top-matter {
+	width: 70%;
+	padding: 0 10px;
+}
 #blocklyArea {
 	height: 100%;
-	width: 80%;
+	width: 70%;
 	float: left;
 }
 #js-output {
-	width: calc(19% - 1px);
-	height: 100%;
-	background-color: #ccc;
-	float: left;
-}
-#blocklyDiv {
+	width: 30%;
+	height: 100vh;
 	position: absolute;
+	right: 0;
+	top: 0;
 }
-#toolbox {
-	display: none;
+#js-output pre {
+	margin: 0;
+	padding: 5px;
+	overflow: scroll;
 }
-.run-js {
-	display: block;
-	width: 100%;
-	font-family: fantasy;
+#js-output .code {
+	height: calc(50% - 3vh);
+	background-color: #ccc;
+}
+#js-output .console {
+	height: calc(50% - 3vh);
+	background-color: #ddd;
+}
+.button-label {
+	font-family: monospace;
+}
+.run-js, .clear-console {
+	/*float:left;*/
+	display: inline-block;
+	width: 50%;
+	font-family: 'Passion One', sans-serif;
 	border: 2px solid black;
 	background-color: #fff;
 	color: #000;
@@ -40,9 +60,15 @@ h1 {
 	text-decoration: none;
 	text-transform: uppercase;
 	font-size: 20px;
-	padding: 1em 0;
+	line-height: 1em;
+	padding: calc(3vh - .5em) 0;
 }
-.run-js:hover {
-	font-weight: bold;
+.run-js:hover, .clear-console:hover,
+.run-js:active, .clear-console:active {
 	background-color: #ddd;
 }
+/*.clear-console:after {
+	content: "";
+	display: table;
+	clear: both;
+}*/
