@@ -5,7 +5,7 @@ var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 
 //--------------------Imported
-/* TODO: Change toolbox XML ID if necessary. Can export toolbox XML from Workspace Factory. */
+
 var toolbox = document.getElementById("toolbox");
 
 var options = { 
@@ -44,16 +44,13 @@ var workspace = Blockly.inject(blocklyDiv, options);
 
 /* Load Workspace Blocks from XML to workspace. Remove all code below if no blocks to load */
 
-/* TODO: Change workspace blocks XML ID if necessary. Can export workspace blocks XML from Workspace Factory. */
 var workspaceBlocks = document.getElementById("workspaceBlocks"); 
 
 /* Load blocks to workspace. */
 Blockly.Xml.domToWorkspace(workspaceBlocks, workspace);
+
 //--------------------End Import
 
-/*var workspace = Blockly.inject(blocklyDiv,
-		{media: 'vendor/media/',
-		 toolbox: document.getElementById('toolbox')});*/
 var onresize = function(e) {
 	// Compute the absolute coordinates and dimensions of blocklyArea.
 	var element = blocklyArea;
@@ -78,6 +75,12 @@ workspace.addChangeListener(function () {
 	var code = Blockly.JavaScript.workspaceToCode(workspace);
 	$("#js-output .code").text(code);
 });
+
+Blockly.JavaScript['text_print'] = function(block) {
+	var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
+		Blockly.JavaScript.ORDER_NONE) || '\'\'';
+	return '$(\".console\").append((JSON.stringify(' + msg + ')) + "\\n");\n';
+};
 
 $(".run-js").on("click", function() {
 	// Generate JavaScript code and run it.
