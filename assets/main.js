@@ -1,3 +1,6 @@
+$("#blocklyArea").css("height", "calc(100vh - " + $(".top-matter").css("height"));
+
+
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject(blocklyDiv,
@@ -28,16 +31,18 @@ workspace.addChangeListener(function () {
 	$("#js-output .code").text(code);
 });
 
-$(".main-js").on("click", function() {
+$(".run-js").on("click", function() {
+	// Generate JavaScript code and run it.
+	window.LoopTrap = 1000;
+	Blockly.JavaScript.INFINITE_LOOP_TRAP =
+		'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
 	var code = Blockly.JavaScript.workspaceToCode(workspace);
-	var myInterpreter = new Interpreter(code);
-	myInterpreter.run();
-	/*function nextStep() {
-		if (myInterpreter.step()) {
-			window.setTimeout(nextStep, 10);
-		}
+	Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+	try {
+		eval(code);
+	} catch (e) {
+		alert(e);
 	}
-	nextStep();*/
 	return false;
 });
 $(".clear-console").on("click", function() {
