@@ -79,7 +79,8 @@ workspace.addChangeListener(function () {
 Blockly.JavaScript['text_print'] = function(block) {
 	var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
 		Blockly.JavaScript.ORDER_NONE) || '\'\'';
-	return '$(\".console\").append((JSON.stringify(' + msg + ')) + "\\n");\n';
+	//return '$(\".console\").append((JSON.stringify(' + msg + ')) + "\\n");\n';
+	return '$(\".console\").append((' + msg + ') + "\\n");\n';
 };
 
 $(".run-js").on("click", function() {
