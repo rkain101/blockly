@@ -71,6 +71,24 @@ window.addEventListener('resize', onresize, false);
 onresize();
 Blockly.svgResize(workspace);
 
+//Storage
+// An href with #key trigers an AJAX call to retrieve saved blocks.
+/*if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+	BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+}
+
+
+if ('BlocklyStorage' in window) {
+	BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+	BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n%1';
+	BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+	BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+		'Perhaps it was created with a different version of Blockly?';
+} else {
+	document.write('<p id="sorry">Sorry, cloud storage is not available.  This demo must be hosted on App Engine.</p>');
+}*/
+
+
 workspace.addChangeListener(function () {
 	var code = Blockly.JavaScript.workspaceToCode(workspace);
 	$("#js-output .code").text(code);
@@ -80,12 +98,13 @@ Blockly.JavaScript['text_print'] = function(block) {
 	var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
 		Blockly.JavaScript.ORDER_NONE) || '\'\'';
 	//return '$(\".console\").append((JSON.stringify(' + msg + ')) + "\\n");\n';
-	return '$(\".console\").append((' + msg + ') + "\\n");\n';
+	return '$(\".console\").text((' + msg + ') + "\\n");\n';
 };
 
 $(".run-js").on("click", function() {
+	$(".clear-console").trigger("click");
 	// Generate JavaScript code and run it.
-	window.LoopTrap = 1000;
+	window.LoopTrap = 10000;
 	Blockly.JavaScript.INFINITE_LOOP_TRAP =
 		'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
 	var code = Blockly.JavaScript.workspaceToCode(workspace);

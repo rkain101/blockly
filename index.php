@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Blockly</title>
+	<script src="vendor/appengine/storage.js"></script>
 	<script src="vendor/blockly_compressed.js"></script>
 	<script src="vendor/blocks_compressed.js"></script>
 	<script type="text/javascript" src="vendor/javascript_compressed.js"></script>
@@ -388,7 +389,6 @@
 	</xml>
 	<!--<script type="text/xmldata" src="assets/workspace.xml"></script>-->
 	<xml xmlns="http://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
-
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="assets/main.js"></script>
